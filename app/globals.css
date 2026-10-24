@@ -1,26 +1,142 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-paper: #f7f0e5;
+  --color-cream: #f1e5d5;
+  --color-blush: #e8cfc2;
+  --color-champagne: #c6a779;
+  --color-antique: #a88a5c;
+  --color-sage: #8a916f;
+  --color-olive: #536344;
+  --color-forest: #293c2b;
+  --color-ink: #514335;
+  --color-muted: #8a7967;
+  --color-line: #d8c2a2;
+
+  --font-script: var(--font-great-vibes), "Brush Script MT", cursive;
+  --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-montserrat), "Helvetica Neue", Arial, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #e9dfcf;
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fine paper grain, generated with SVG turbulence (no image download). */
+.paper {
+  background-color: var(--color-paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .36 0 0 0 0 .25 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.55), transparent 70%);
+}
+
+.paper-warm {
+  background-color: var(--color-cream);
+}
+
+/* Desktop backdrop surrounding the portrait invitation column. */
+.backdrop {
+  background-color: #e6dccb;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.envelope-surface {
+  background-color: #7b8460;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .12 0 0 0 0 .05 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 45%, #8a936e 0%, #77805c 60%, #646d4c 100%);
+}
+
+/* Glitter flecks drawn over the revealed date heart. */
+.fleck-text {
+  background: linear-gradient(120deg, #6b5536, #a88a5c 40%, #6b5536 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes float-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes water-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes seal-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+.animate-float-down {
+  animation: float-down 2.4s ease-in-out infinite;
+}
+
+.water-flow {
+  stroke-dasharray: 4 8;
+  animation: water-flow 1.6s linear infinite;
+}
+
+.seal-breathe {
+  animation: seal-breathe 2.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-float-down,
+  .water-flow,
+  .seal-breathe {
+    animation: none;
+  }
+}
+
+.field {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  background: rgba(255, 252, 246, 0.7);
+  border-radius: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.field::placeholder {
+  color: #b2a291;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--color-olive);
+  box-shadow: 0 0 0 3px rgba(83, 99, 68, 0.15);
+}
+
+.field[aria-invalid="true"] {
+  border-color: #a5544a;
 }
