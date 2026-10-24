@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# RoopsWedding
 
-## Getting Started
+An animated digital wedding invitation built with Next.js (App Router), React, TypeScript, Tailwind CSS v4 and Framer Motion.
 
-First, run the development server:
+## Run
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run lint
+npm run build && npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Personalise
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+All content lives in [`lib/wedding-config.ts`](lib/wedding-config.ts): names, families, date and time zone, schedule, venue, dress code, extra details, RSVP settings, photo and music. Values marked `PLACEHOLDER` must be replaced before sharing.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Photo:** put your image in `public/images/wedding/` and update `photo.src`, `width`, `height` and `alt`.
+- **Venue map:** set `venue.mapQuery` to the real address and `isPlaceholder: false`.
+- **Music:** add a licensed track (e.g. `public/audio/theme.mp3`) and set `music.src`. The sound toggle appears only when a track is configured, and playback starts on the envelope tap.
 
-## Learn More
+## RSVP storage
 
-To learn more about Next.js, take a look at the following resources:
+The form posts JSON to `NEXT_PUBLIC_RSVP_ENDPOINT` (see [`lib/rsvp.ts`](lib/rsvp.ts)). Create `.env.local`:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+NEXT_PUBLIC_RSVP_ENDPOINT=https://formspree.io/f/your-id
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Any JSON-accepting service works: Formspree, Getform, a Google Apps Script writing to a Sheet, or your own API route. Without it, guests see a clear note that their reply was **not** saved; set `rsvp.email` to offer a pre-filled email fallback.
 
-## Deploy on Vercel
+## Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/                      layout (fonts, metadata), page, globals.css
+components/wedding/
+  WeddingExperience.tsx   envelope state machine: closed → opening → revealed
+  envelope/               gatefold panels, leaf pattern, seal
+  hero/                   curtains, garden & fountain, names
+  scratch/                scratch-to-reveal canvas, save-the-date
+  sections/               welcome, photo, countdown, timeline, venue, dress code, details, closing
+  rsvp/                   RSVP section and form
+  illustrations/          palace line art, dress-code icons
+  ui/                     heart, divider, headings, reveal, buttons, sound toggle
+lib/                      config, formatting, countdown, calendar (.ics), validation, RSVP submit
+```
