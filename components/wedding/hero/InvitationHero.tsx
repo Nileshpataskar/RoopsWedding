@@ -117,10 +117,10 @@ export function InvitationHero({ active }: InvitationHeroProps) {
           <HeartDivider width="w-32" />
         </motion.div>
 
-        <motion.h1 variants={item} className={`${nameClass} mt-3`}>
-          {groom.name}
-        </motion.h1>
-        <PersonDetails person={groom} />
+        <motion.p variants={item} className={`${nameClass} mt-3`}>
+          {bride.name}
+        </motion.p>
+        {/* <PersonDetails person={bride} /> */}
 
         <motion.p
           variants={item}
@@ -129,11 +129,13 @@ export function InvitationHero({ active }: InvitationHeroProps) {
         >
           &amp;
         </motion.p>
+        <motion.h1 variants={item} className={`${nameClass} mt-3`}>
+          {groom.name}
+        </motion.h1>
+        {/* <PersonDetails person={groom} /> */}
 
-        <motion.p variants={item} className={nameClass}>
-          {bride.name}
-        </motion.p>
-        <PersonDetails person={bride} />
+
+
       </motion.div>
 
       <div className="pointer-events-none relative">

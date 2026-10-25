@@ -56,14 +56,12 @@ export const wedding = {
   welcome:
     "We are delighted to invite you to celebrate our wedding and the beginning of our journey together. Your presence would make this special occasion even more meaningful.",
 
-  // PLACEHOLDER illustration — replace `src` with a real photograph
-  // (e.g. /images/wedding/couple-photo.webp) and set isPlaceholder to false.
   photo: {
-    src: "/images/wedding/couple-photo-placeholder.svg",
-    alt: "Illustration of two gold wedding rings resting among blush roses",
-    width: 800,
-    height: 1000,
-    isPlaceholder: true,
+    src: "/images/wedding/couple-photo.png",
+    alt: "Illustrated caricature of Nilesh in an ivory sherwani and purple pheta, smiling down at Rupali in a purple Paithani saree, framed by marigold garlands and a gold mandala",
+    width: 927,
+    height: 1152,
+    isPlaceholder: false,
   },
 
   events: [
