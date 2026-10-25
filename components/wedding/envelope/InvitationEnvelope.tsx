@@ -45,7 +45,7 @@ export function InvitationEnvelope({ state, onOpen, onOpened }: InvitationEnvelo
       />
 
       <div
-        className="relative h-full w-full max-w-[520px] md:shadow-[0_0_60px_rgba(60,50,30,.25)]"
+        className="relative h-full w-full max-w-[520px] md:shadow-[0_0_80px_rgba(15,4,20,.6)]"
         style={{ perspective: 1800 }}
       >
         <motion.div

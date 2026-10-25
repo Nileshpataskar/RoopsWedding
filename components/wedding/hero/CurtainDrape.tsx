@@ -4,7 +4,7 @@
  * stretches vertically (preserveAspectRatio="none") so it spans any hero height.
  */
 
-const GOLD = "#c6a779";
+const GOLD = "#d6ad5c";
 
 const OUTLINE = "M0 0 H60 C 57 200, 47 420, 30 600 C 40 700, 53 860, 58 1000 H0 Z";
 const INNER_EDGE = "M60 0 C 57 200, 47 420, 30 600 C 40 700, 53 860, 58 1000";
@@ -20,19 +20,19 @@ export function CurtainDrape({ className = "" }: { className?: string }) {
     <svg viewBox="0 0 60 1000" preserveAspectRatio="none" aria-hidden="true" className={className}>
       <defs>
         <linearGradient id="drape-folds" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#e6cfc1" />
-          <stop offset="0.12" stopColor="#f8ede4" />
-          <stop offset="0.26" stopColor="#e2c7b8" />
-          <stop offset="0.42" stopColor="#f6eadf" />
-          <stop offset="0.58" stopColor="#e4cabc" />
-          <stop offset="0.74" stopColor="#f7ece2" />
-          <stop offset="0.9" stopColor="#e1c6b7" />
-          <stop offset="1" stopColor="#f2e2d6" />
+          <stop offset="0" stopColor="#3a1844" />
+          <stop offset="0.12" stopColor="#5f2c6c" />
+          <stop offset="0.26" stopColor="#3f1b4a" />
+          <stop offset="0.42" stopColor="#66307a" />
+          <stop offset="0.58" stopColor="#421d4d" />
+          <stop offset="0.74" stopColor="#5e2b6b" />
+          <stop offset="0.9" stopColor="#3b1946" />
+          <stop offset="1" stopColor="#532663" />
         </linearGradient>
       </defs>
       <path d={OUTLINE} fill="url(#drape-folds)" />
       {FOLDS.map((d) => (
-        <path key={d} d={d} fill="none" stroke="#cfae9b" strokeOpacity="0.55" strokeWidth="1" vectorEffect="non-scaling-stroke" />
+        <path key={d} d={d} fill="none" stroke="#1e0a24" strokeOpacity="0.45" strokeWidth="1" vectorEffect="non-scaling-stroke" />
       ))}
       <path d={INNER_EDGE} fill="none" stroke={GOLD} strokeWidth="2" vectorEffect="non-scaling-stroke" />
       <path d={INNER_EDGE} transform="translate(-3 0)" fill="none" stroke={GOLD} strokeOpacity="0.5" strokeWidth="0.8" strokeDasharray="2 3" vectorEffect="non-scaling-stroke" />

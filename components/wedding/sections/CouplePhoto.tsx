@@ -7,7 +7,7 @@ export function CouplePhoto() {
   return (
     <section aria-label="Couple photograph" className="paper-warm px-7 py-16">
       <Reveal className="mx-auto max-w-sm">
-        <figure className="rounded-[14px] border border-line/80 bg-paper p-2 shadow-[0_6px_24px_rgba(81,67,53,.08)]">
+        <figure className="rounded-[14px] border border-champagne bg-paper p-2 shadow-[0_10px_30px_rgba(63,29,74,.14)] ring-1 ring-champagne/40 ring-offset-4 ring-offset-cream">
           <Image
             src={photo.src}
             alt={photo.alt}

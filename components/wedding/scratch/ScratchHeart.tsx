@@ -4,7 +4,7 @@ import { useCallback, useEffect, useRef, useState, type PointerEvent, type React
 import { HEART_PATH } from "../ui/Heart";
 
 type ScratchHeartProps = {
-  /** Content hidden under the green foil — rendered inside the heart. */
+  /** Content hidden under the gold foil — rendered inside the heart. */
   children: ReactNode;
   /** Share of the heart that must be scratched before auto-completing. */
   threshold?: number;
@@ -20,7 +20,7 @@ function applyHeartTransform(ctx: CanvasRenderingContext2D, w: number, h: number
   ctx.setTransform(dpr * (w / PATH_BOX.w), 0, 0, dpr * (h / PATH_BOX.h), -PATH_BOX.x * dpr * (w / PATH_BOX.w), -PATH_BOX.y * dpr * (h / PATH_BOX.h));
 }
 
-/** Paints the textured sage foil, clipped to the heart. */
+/** Paints the textured gold foil, clipped to the heart. */
 function paintFoil(ctx: CanvasRenderingContext2D, w: number, h: number, dpr: number, fontFamily: string) {
   const heart = new Path2D(HEART_PATH);
   ctx.globalCompositeOperation = "source-over";
@@ -33,21 +33,21 @@ function paintFoil(ctx: CanvasRenderingContext2D, w: number, h: number, dpr: num
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
   const base = ctx.createRadialGradient(w * 0.4, h * 0.3, 10, w * 0.5, h * 0.5, w * 0.7);
-  base.addColorStop(0, "#9aa37c");
-  base.addColorStop(0.55, "#7b855d");
-  base.addColorStop(1, "#56613f");
+  base.addColorStop(0, "#f3d58e");
+  base.addColorStop(0.5, "#d2a24e");
+  base.addColorStop(1, "#9c6f25");
   ctx.fillStyle = base;
   ctx.fillRect(0, 0, w, h);
 
-  // fine paper grain
+  // fine foil grain
   for (let i = 0; i < (w * h) / 5; i++) {
     const light = Math.random() > 0.5;
-    ctx.fillStyle = light ? "rgba(235,240,215,0.07)" : "rgba(30,38,20,0.09)";
+    ctx.fillStyle = light ? "rgba(255,246,215,0.08)" : "rgba(90,55,10,0.09)";
     ctx.fillRect(Math.random() * w, Math.random() * h, 1, 1);
   }
   // metallic flecks
   for (let i = 0; i < (w * h) / 260; i++) {
-    ctx.fillStyle = `rgba(${Math.random() > 0.5 ? "226,203,150" : "245,236,210"},${0.35 + Math.random() * 0.5})`;
+    ctx.fillStyle = `rgba(${Math.random() > 0.5 ? "255,240,200" : "255,252,240"},${0.35 + Math.random() * 0.5})`;
     ctx.beginPath();
     ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.2 + 0.3, 0, Math.PI * 2);
     ctx.fill();
@@ -55,7 +55,7 @@ function paintFoil(ctx: CanvasRenderingContext2D, w: number, h: number, dpr: num
 
   ctx.font = `italic ${Math.round(w * 0.065)}px ${fontFamily}`;
   ctx.textAlign = "center";
-  ctx.fillStyle = "rgba(247,240,229,0.55)";
+  ctx.fillStyle = "rgba(63,29,74,0.6)";
   ctx.fillText("scratch here", w / 2, h * 0.52);
   ctx.restore();
 
@@ -63,7 +63,7 @@ function paintFoil(ctx: CanvasRenderingContext2D, w: number, h: number, dpr: num
   ctx.save();
   applyHeartTransform(ctx, w, h, dpr);
   ctx.lineWidth = 0.35;
-  ctx.strokeStyle = "rgba(214,191,143,0.85)";
+  ctx.strokeStyle = "rgba(169,123,44,0.9)";
   ctx.stroke(heart);
   ctx.restore();
 }
@@ -159,8 +159,8 @@ export function ScratchHeart({ children, threshold = 0.55 }: ScratchHeartProps) 
           aria-hidden="true"
           className="absolute inset-0 h-full w-full"
         >
-          <path d={HEART_PATH} fill="#fbf6ee" stroke="#c6a779" strokeWidth="0.25" />
-          <path d={HEART_PATH} fill="none" stroke="#c6a779" strokeWidth="0.08" transform="translate(12 12.6) scale(0.9) translate(-12 -12.6)" />
+          <path d={HEART_PATH} fill="#fffaf0" stroke="#d6ad5c" strokeWidth="0.25" />
+          <path d={HEART_PATH} fill="none" stroke="#d6ad5c" strokeWidth="0.08" transform="translate(12 12.6) scale(0.9) translate(-12 -12.6)" />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center pb-[8%]">{children}</div>
 
@@ -201,7 +201,7 @@ export function ScratchHeart({ children, threshold = 0.55 }: ScratchHeartProps) 
           <button
             type="button"
             onClick={() => setRevealed(true)}
-            className="font-sans text-[0.7rem] uppercase tracking-[0.25em] text-muted underline decoration-line underline-offset-4 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive"
+            className="font-sans text-[0.7rem] uppercase tracking-[0.25em] text-muted underline decoration-line underline-offset-4 transition hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum"
           >
             {touched ? "Reveal it all" : "Reveal without scratching"}
           </button>

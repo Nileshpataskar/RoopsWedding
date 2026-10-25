@@ -1,16 +1,25 @@
+import { DiyaDefs, DiyaGlyph } from "../illustrations/Diya";
+
 /**
  * Symmetrical formal garden: hedges, cypress topiaries, stone plinths with
- * flower urns, a tiered fountain on the central axis, and rose bushes framing
- * the foreground.
+ * flower urns, a tiered fountain on the central axis, marigold and rose
+ * bushes framing the foreground, and diyas lining the walkway.
  */
 
-const STONE = "#e9dfcf";
-const STONE_SHADE = "#cdbfa8";
-const STONE_LINE = "#b6a68c";
+const STONE = "#f1e6d2";
+const STONE_SHADE = "#dccaa8";
+const STONE_LINE = "#c2a878";
 
 type Rose = { x: number; y: number; r: number; color: string };
 
-const ROSE_COLORS = ["#e7bfb4", "#dca39a", "#f3e4d6", "#e9c6bb", "#d9988f"];
+const ROSE_COLORS = ["#e8892a", "#9a5fb0", "#f2b233", "#e9a0b4", "#f6c75a"];
+
+const DIYAS = [
+  { x: 120, y: 296, s: 0.62 },
+  { x: 158, y: 299, s: 0.55 },
+  { x: 242, y: 299, s: 0.55 },
+  { x: 280, y: 296, s: 0.62 },
+];
 
 // Deterministic rose positions for the left bush; the right bush mirrors them.
 const LEFT_ROSES: Rose[] = [
@@ -42,11 +51,11 @@ const LEFT_LEAVES = [
 function RoseBloom({ x, y, r, color }: Rose) {
   return (
     <g>
-      <circle cx={x} cy={y} r={r} fill={color} stroke="#b9877d" strokeWidth="0.4" />
+      <circle cx={x} cy={y} r={r} fill={color} stroke="#9c4a1a" strokeWidth="0.4" />
       <path
         d={`M${x} ${y} m ${-r * 0.15} 0 a ${r * 0.2} ${r * 0.2} 0 1 1 ${r * 0.3} 0 a ${r * 0.4} ${r * 0.4} 0 1 1 ${-r * 0.7} 0 a ${r * 0.6} ${r * 0.6} 0 1 1 ${r * 1.15} ${r * 0.05}`}
         fill="none"
-        stroke="#b58075"
+        stroke="#8a3a17"
         strokeOpacity="0.65"
         strokeWidth="0.6"
       />
@@ -104,7 +113,7 @@ function Plinth({ x }: { x: number }) {
           cy={i > 3 ? 188 : 196 - (i % 2) * 3}
           r={i === 6 ? 5 : 4.2}
           fill={ROSE_COLORS[i % ROSE_COLORS.length]}
-          stroke="#b9877d"
+          stroke="#9c4a1a"
           strokeWidth="0.35"
         />
       ))}
@@ -178,9 +187,10 @@ export function GardenScene({ className = "" }: { className?: string }) {
           <stop offset="1" stopColor="#c4b59d" />
         </linearGradient>
         <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#e7dccb" />
-          <stop offset="1" stopColor="#f2eadd" />
+          <stop offset="0" stopColor="#efe2cb" />
+          <stop offset="1" stopColor="#f8efe0" />
         </linearGradient>
+        <DiyaDefs id="garden-diya" />
         <linearGradient id="hedge-wall" x1="0" y1="128" x2="0" y2="170" gradientUnits="userSpaceOnUse">
           <stop offset="0" stopColor="#7d8c62" stopOpacity="0.35" />
           <stop offset="1" stopColor="#7d8c62" />
@@ -197,8 +207,8 @@ export function GardenScene({ className = "" }: { className?: string }) {
 
       {/* stone floor and walkway */}
       <rect x="0" y="202" width="400" height="98" fill="url(#floor)" />
-      <path d="M172 202 H228 L310 300 H90 Z" fill="#f6efe4" />
-      <g stroke="#d8cbb6" strokeWidth="0.5">
+      <path d="M172 202 H228 L310 300 H90 Z" fill="#fbf3e6" />
+      <g stroke="#e2cfae" strokeWidth="0.5">
         {[216, 234, 258, 288].map((y) => {
           const t = (y - 202) / 98;
           return <line key={y} x1={172 - 82 * t} y1={y} x2={228 + 82 * t} y2={y} />;
@@ -231,6 +241,10 @@ export function GardenScene({ className = "" }: { className?: string }) {
       <g transform="translate(400 0) scale(-1 1)">
         <RoseBush />
       </g>
+
+      {DIYAS.map((d) => (
+        <DiyaGlyph key={d.x} id="garden-diya" x={d.x} y={d.y} scale={d.s} />
+      ))}
     </svg>
   );
 }

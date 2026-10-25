@@ -48,13 +48,13 @@ export function LeafPattern({ id }: { id: string }) {
       <defs>
         <pattern id={id} width="64" height="96" patternUnits="userSpaceOnUse">
           {/* shadow, highlight and face layers create a debossed look */}
-          <g transform="translate(0.9 0.9)" fill="none" stroke="#3a432d" strokeOpacity="0.45" strokeWidth="1">
+          <g transform="translate(0.9 0.9)" fill="none" stroke="#1e0a24" strokeOpacity="0.5" strokeWidth="1">
             <Tile />
           </g>
-          <g transform="translate(-0.6 -0.6)" fill="none" stroke="#c9cfab" strokeOpacity="0.4" strokeWidth="0.9">
+          <g transform="translate(-0.6 -0.6)" fill="none" stroke="#f0cf8a" strokeOpacity="0.28" strokeWidth="0.9">
             <Tile />
           </g>
-          <g fill="#8c9570" fillOpacity="0.55" stroke="#7c8560" strokeWidth="0.6">
+          <g fill="#b2813a" fillOpacity="0.35" stroke="#c99a4c" strokeOpacity="0.6" strokeWidth="0.6">
             <Tile />
           </g>
         </pattern>

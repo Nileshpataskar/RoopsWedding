@@ -1,6 +1,6 @@
 /** Scalloped theatre swags with gold trim, beads and tassels across the top. */
 
-const GOLD = "#c6a779";
+const GOLD = "#d6ad5c";
 
 function bezier(p0: number, p1: number, p2: number, p3: number, t: number) {
   const u = 1 - t;
@@ -61,16 +61,16 @@ export function CurtainSwags({ className = "" }: { className?: string }) {
     <svg viewBox="0 0 400 130" aria-hidden="true" className={className}>
       <defs>
         <linearGradient id="swag-front" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#fbf3eb" />
-          <stop offset="55%" stopColor="#f1e0d4" />
-          <stop offset="100%" stopColor="#e3c8b9" />
+          <stop offset="0%" stopColor="#4e2259" />
+          <stop offset="55%" stopColor="#66307a" />
+          <stop offset="100%" stopColor="#7d4290" />
         </linearGradient>
         <linearGradient id="swag-back" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#efe0d3" />
-          <stop offset="100%" stopColor="#dcc0b0" />
+          <stop offset="0%" stopColor="#3a1844" />
+          <stop offset="100%" stopColor="#532663" />
         </linearGradient>
         <filter id="swag-shadow" x="-5%" y="-5%" width="110%" height="130%">
-          <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" floodColor="#7a5c44" floodOpacity="0.22" />
+          <feDropShadow dx="0" dy="2.5" stdDeviation="2.2" floodColor="#1e0a24" floodOpacity="0.35" />
         </filter>
       </defs>
 
@@ -78,14 +78,14 @@ export function CurtainSwags({ className = "" }: { className?: string }) {
         {BACK.map((s) => (
           <g key={`back-${s.a}`}>
             <path d={swagPath(s)} fill="url(#swag-back)" />
-            <path d={foldPath(s, 62)} fill="none" stroke="#c9a995" strokeOpacity="0.5" strokeWidth="0.7" />
+            <path d={foldPath(s, 62)} fill="none" stroke="#1e0a24" strokeOpacity="0.45" strokeWidth="0.7" />
             <path d={trimPath(s)} fill="none" stroke={GOLD} strokeWidth="0.8" />
           </g>
         ))}
       </g>
 
       {/* valance band */}
-      <rect x="0" y="0" width="400" height="14" fill="#f4e6da" />
+      <rect x="0" y="0" width="400" height="14" fill="#3a1844" />
       <line x1="0" y1="14" x2="400" y2="14" stroke={GOLD} strokeWidth="1" />
       <line x1="0" y1="10" x2="400" y2="10" stroke={GOLD} strokeWidth="0.4" strokeDasharray="2 2" />
 
@@ -94,7 +94,7 @@ export function CurtainSwags({ className = "" }: { className?: string }) {
           <g key={`front-${s.a}`}>
             <path d={swagPath(s)} fill="url(#swag-front)" />
             {[60, 70, 80].map((d) => (
-              <path key={d} d={foldPath(s, d)} fill="none" stroke="#d6b8a6" strokeOpacity="0.55" strokeWidth="0.8" />
+              <path key={d} d={foldPath(s, d)} fill="none" stroke="#24102b" strokeOpacity="0.45" strokeWidth="0.8" />
             ))}
             {beads(s).map((p) => (
               <circle key={`${p.x}-${p.y}`} cx={p.x} cy={p.y} r="1.25" fill="#d8bd92" stroke="#a88a5c" strokeWidth="0.3" />

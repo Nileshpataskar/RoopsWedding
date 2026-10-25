@@ -11,7 +11,7 @@ export function BotanicalSprig({ className = "" }: BotanicalSprigProps) {
     <svg
       viewBox="0 0 200 40"
       aria-hidden="true"
-      className={`mx-auto h-8 w-44 text-sage ${className}`}
+      className={`mx-auto h-8 w-44 text-leaf ${className}`}
       fill="none"
       stroke="currentColor"
       strokeWidth={0.8}
@@ -25,13 +25,14 @@ export function BotanicalSprig({ className = "" }: BotanicalSprigProps) {
             key={`${side}-${x}`}
             d={`M${cx} ${17.5} q ${side * 6} ${up * 7} ${side * 13} ${up * 6} q ${-side * 7} ${-up * 4} ${-side * 13} ${-up * 6}z`}
             fill="currentColor"
-            fillOpacity={0.25}
+            fillOpacity={0.35}
           />
         );
       })}
-      <circle cx="100" cy="16.5" r="2.4" fill="#e8cfc2" stroke="#c6a779" />
-      <circle cx="20" cy="20" r="1.3" fill="currentColor" />
-      <circle cx="180" cy="20" r="1.3" fill="currentColor" />
+      <circle cx="100" cy="16.5" r="3.6" fill="#e8892a" stroke="#d6ad5c" />
+      <circle cx="100" cy="16.5" r="1.6" fill="#f6c75a" stroke="none" />
+      <circle cx="20" cy="20" r="2" fill="#e8892a" stroke="none" />
+      <circle cx="180" cy="20" r="2" fill="#e8892a" stroke="none" />
     </svg>
   );
 }

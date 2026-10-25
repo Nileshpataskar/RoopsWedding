@@ -16,7 +16,7 @@ export function DressCodeSection() {
       <div className="mx-auto mt-10 grid max-w-md gap-10 sm:grid-cols-2 sm:gap-8">
         {GROUPS.map(({ id, title, text, Icon }, index) => (
           <Reveal key={id} delay={0.1 + index * 0.12} className="text-center">
-            <Icon className="mx-auto h-14 w-10 text-olive" />
+            <Icon className="mx-auto h-14 w-10 text-plum" />
             <h3 className="mt-3 font-sans text-[0.72rem] uppercase tracking-[0.25em] text-antique">
               {title}
             </h3>

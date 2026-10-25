@@ -21,7 +21,7 @@ export default function Home() {
       <VenueSection />
       <DressCodeSection />
       <AdditionalDetails />
-      <RsvpSection />
+      {/* <RsvpSection /> */}
       <ClosingSection />
     </WeddingExperience>
   );

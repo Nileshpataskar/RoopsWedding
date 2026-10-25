@@ -37,7 +37,7 @@ export function SoundToggle({ src, title, audioRef }: SoundToggleProps) {
           if (audio.paused) audio.play().catch(() => setPlaying(false));
           else audio.pause();
         }}
-        className="fixed top-4 right-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper/85 text-olive shadow-sm transition hover:bg-paper active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive md:right-[calc(50%-260px+1rem)]"
+        className="fixed top-4 right-4 z-40 flex h-10 w-10 items-center justify-center rounded-full border border-line bg-paper/85 text-plum shadow-sm transition hover:bg-paper active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-plum md:right-[calc(50%-260px+1rem)]"
       >
         {playing ? (
           <Volume2 className="h-4 w-4" strokeWidth={1.6} />

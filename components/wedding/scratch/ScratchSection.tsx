@@ -13,7 +13,7 @@ function OutlineHeartDetail() {
   return (
     <div className="relative mx-auto w-44" style={{ aspectRatio: "22.8 / 17.5" }}>
       <svg viewBox="0.6 3.8 22.8 17.5" aria-hidden="true" className="absolute inset-0 h-full w-full">
-        <path d={HEART_PATH} fill="none" stroke="#a88a5c" strokeWidth="0.18" />
+        <path d={HEART_PATH} fill="none" stroke="#a97b2c" strokeWidth="0.18" />
       </svg>
       <p className="absolute inset-0 flex flex-col items-center justify-center pb-[10%] text-center leading-tight text-ink">
         <span className="font-sans text-[0.58rem] uppercase tracking-[0.25em] text-muted">
@@ -39,7 +39,7 @@ export function ScratchSection() {
             <span className="fleck-text mt-2 block font-serif text-[clamp(1.05rem,5vw,1.35rem)] font-semibold uppercase tracking-[0.18em]">
               {date.month}
             </span>
-            <span className="font-script block text-[clamp(3.2rem,15vw,4.2rem)] leading-[1.1] text-ink">
+            <span className="font-script block text-[clamp(3.2rem,15vw,4.2rem)] leading-[1.1] text-royal">
               {date.day}
             </span>
             <span className="block font-serif text-lg tracking-[0.3em] text-ink">{date.year}</span>

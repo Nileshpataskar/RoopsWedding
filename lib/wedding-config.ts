@@ -16,7 +16,7 @@ export type Person = {
 export type ProgramEvent = {
   id: string;
   title: string;
-  /** ISO 8601 with offset, e.g. 2026-11-30T10:00:00Z */
+  /** ISO 8601 with offset, e.g. 2026-12-18T10:00:00Z */
   start: string;
   description: string;
   location?: string;
@@ -34,23 +34,23 @@ export const wedding = {
   // PLACEHOLDER couple details
   groom: {
     name: "Nilesh",
-    parents: "Son of Mr. & Mrs. Pataskar",
+    parents: "Son of Kailas Pataskar & Mayuri Pataskar",
     qualification: "B.E.",
     profession: "Software Engineer",
   } satisfies Person,
   bride: {
     name: "Rupali",
-    parents: "Daughter of Mr. & Mrs. Patil",
+    parents: "Daughter of Bharat Patil & Sangeeta Patil",
     qualification: "B.E.",
-    profession: "Software Engineer",
+    profession: "E&TC Engineer",
   } satisfies Person,
 
-  // PLACEHOLDER date. Times include an explicit offset; `timeZone` controls
-  // how dates are displayed so server and browser render identical text.
+  // Times include an explicit offset; `timeZone` controls how dates are
+  // displayed so server and browser render identical text.
   date: {
-    start: "2026-11-30T10:00:00Z",
-    end: "2026-11-30T16:00:00Z",
-    timeZone: "Europe/London",
+    start: "2026-12-18T10:00:00+05:30",
+    end: "2026-12-18T22:00:00+05:30",
+    timeZone: "Asia/Kolkata",
   },
 
   welcome:
@@ -66,41 +66,42 @@ export const wedding = {
     isPlaceholder: true,
   },
 
-  // PLACEHOLDER schedule
   events: [
     {
-      id: "arrival",
-      title: "Guest Arrival",
-      start: "2026-11-30T10:00:00Z",
-      description: "We welcome you.",
+      id: "engagement",
+      title: "Engagement Ceremony",
+      start: "2026-12-18T10:00:00+05:30",
+      description: "The exchange of rings to begin celebrations.",
+    },
+    {
+      id: "haldi",
+      title: "Haldi",
+      start: "2026-12-18T12:30:00+05:30",
+      description: "Turmeric, laughter and blessings.",
+    },
+    {
+      id: "vidhi",
+      title: "Wedding Rituals (Vidhi)",
+      start: "2026-12-18T15:30:00+05:30",
+      description: "Traditional rituals performed with family.",
     },
     {
       id: "ceremony",
       title: "Wedding Ceremony",
-      start: "2026-11-30T10:30:00Z",
+      start: "2026-12-18T19:00:00+05:30",
       description: "Your presence means a lot.",
-    },
-    {
-      id: "lunch",
-      title: "Wedding Lunch",
-      start: "2026-11-30T13:00:00Z",
-      description: "Join us at the table.",
-    },
-    {
-      id: "farewell",
-      title: "Farewell",
-      start: "2026-11-30T15:30:00Z",
-      description: "With love and gratitude.",
     },
   ] satisfies ProgramEvent[],
 
-  // PLACEHOLDER venue. While `isPlaceholder` is true the site shows a small
-  // note that the map location is a sample and not yet confirmed.
+  // While `isPlaceholder` is true the site shows a small note that the map
+  // location is a sample and not yet confirmed.
   venue: {
-    name: "Grand Palace Hall",
-    address: "City centre, London",
-    mapQuery: "Grand Palace Hall, London",
-    isPlaceholder: true,
+    name: "Murlidhar Banquet Hall",
+    address:
+      "Dattanagar, Alandi - Moshi Rd, Dudulgaon, PCMC, Pimpri-Chinchwad, Maharashtra 412105",
+    mapQuery:
+      "Murlidhar Pure Veg, Dattanagar, Alandi - Moshi Rd, Dudulgaon, Pimpri-Chinchwad, Maharashtra 412105",
+    isPlaceholder: false,
   },
 
   dressCode: {
@@ -113,12 +114,6 @@ export const wedding = {
   // non-specific — replace with real arrangements or remove them.
   details: [
     {
-      id: "pre-wedding",
-      title: "Pre-wedding Ceremonies",
-      description:
-        "Details of the Haldi and other celebrations will be shared with family and close friends closer to the date.",
-    },
-    {
       id: "travel",
       title: "Travel & Stay",
       description:
@@ -128,7 +123,7 @@ export const wedding = {
 
   rsvp: {
     /** Inclusive date by which responses are requested. */
-    deadline: "2026-11-15T23:59:00Z",
+    deadline: "2026-12-15T23:59:00+05:30",
     /** Maximum number of guests one response may include (incl. the guest). */
     maxGuests: 4,
     /**

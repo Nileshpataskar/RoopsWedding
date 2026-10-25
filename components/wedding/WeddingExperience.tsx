@@ -48,7 +48,7 @@ export function WeddingExperience({ children }: WeddingExperienceProps) {
       {music && <SoundToggle src={music} title={wedding.music.title} audioRef={audioRef} />}
 
       <main
-        className="relative mx-auto w-full max-w-[520px] overflow-x-clip md:shadow-[0_0_60px_rgba(60,50,30,.18)]"
+        className="relative mx-auto w-full max-w-[520px] overflow-x-clip md:shadow-[0_0_80px_rgba(15,4,20,.55)]"
         aria-hidden={state === "closed" ? true : undefined}
         inert={state === "closed" ? true : undefined}
       >

@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #f7f0e5;
-  --color-cream: #f1e5d5;
-  --color-blush: #e8cfc2;
-  --color-champagne: #c6a779;
-  --color-antique: #a88a5c;
-  --color-sage: #8a916f;
-  --color-olive: #536344;
-  --color-forest: #293c2b;
-  --color-ink: #514335;
-  --color-muted: #8a7967;
-  --color-line: #d8c2a2;
+  --color-paper: #fcf6ec;
+  --color-cream: #f7ead6;
+  --color-blush: #ead9ee;
+  --color-champagne: #d6ad5c;
+  --color-antique: #a97b2c;
+  --color-marigold: #e89a2c;
+  --color-plum: #6b2f7a;
+  --color-royal: #3f1d4a;
+  --color-leaf: #4f6b3a;
+  --color-ink: #42283f;
+  --color-muted: #86707f;
+  --color-line: #e6cb9c;
 
   --font-script: var(--font-great-vibes), "Brush Script MT", cursive;
   --font-serif: var(--font-cormorant), Georgia, "Times New Roman", serif;
@@ -23,7 +24,7 @@ html {
 }
 
 body {
-  background-color: #e9dfcf;
+  background-color: #3a1844;
   color: var(--color-ink);
   font-family: var(--font-serif);
   -webkit-tap-highlight-color: transparent;
@@ -39,28 +40,42 @@ body {
 
 .paper-warm {
   background-color: var(--color-cream);
+  background-image: radial-gradient(ellipse at 50% 0%, rgba(232, 154, 44, 0.08), transparent 65%);
 }
 
-/* Desktop backdrop surrounding the portrait invitation column. */
+/* Desktop backdrop surrounding the portrait invitation column: aubergine silk
+   with a faint gold lattice. */
 .backdrop {
-  background-color: #e6dccb;
+  background-color: #3a1844;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56'%3E%3Cpath d='M28 4 L52 28 L28 52 L4 28 Z' fill='none' stroke='%23d6ad5c' stroke-opacity='.13' stroke-width='1'/%3E%3Ccircle cx='28' cy='28' r='2' fill='%23d6ad5c' fill-opacity='.18'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 30%, #4e2259 0%, #3a1844 60%, #2a0f32 100%);
+  background-attachment: fixed;
 }
 
 .envelope-surface {
-  background-color: #7b8460;
+  background-color: #4e2259;
   background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .12 0 0 0 0 .05 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    radial-gradient(ellipse at 50% 45%, #8a936e 0%, #77805c 60%, #646d4c 100%);
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .12 0 0 0 0 .04 0 0 0 0 .15 0 0 0 .2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 45%, #5f2c6c 0%, #4a1f55 60%, #351640 100%);
 }
 
-/* Glitter flecks drawn over the revealed date heart. */
+/* Gold-leaf text drawn over the revealed date heart. */
 .fleck-text {
-  background: linear-gradient(120deg, #6b5536, #a88a5c 40%, #6b5536 70%);
+  background: linear-gradient(120deg, #8a5a14, #d6ad5c 40%, #8a5a14 70%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* A slow band of light sweeping across gold text. */
+.gold-shimmer {
+  background: linear-gradient(110deg, #9a6a1c 0%, #9a6a1c 40%, #f3d58e 50%, #9a6a1c 60%, #9a6a1c 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 5s ease-in-out infinite;
 }
 
 @keyframes float-down {
@@ -89,6 +104,81 @@ body {
   }
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  60%,
+  100% {
+    background-position: 0% 0;
+  }
+}
+
+/* Hanging flower strings pivot from their top. */
+@keyframes sway {
+  0%,
+  100% {
+    transform: rotate(-2.5deg);
+  }
+  50% {
+    transform: rotate(2.5deg);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1, 1);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(0.94, 1.08);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.04, 0.95);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(0.97, 1.05);
+    opacity: 0.88;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Petals fall the full height of their container while drifting sideways. */
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.9;
+  }
+  90% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(var(--drift), 105svh, 0) rotate(var(--spin));
+    opacity: 0;
+  }
+}
+
 .animate-float-down {
   animation: float-down 2.4s ease-in-out infinite;
 }
@@ -102,14 +192,46 @@ body {
   animation: seal-breathe 2.8s ease-in-out infinite;
 }
 
+.sway {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  animation: sway 4.5s ease-in-out infinite;
+}
+
+.flame {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: flicker 1.6s ease-in-out infinite;
+}
+
+.flame-glow {
+  animation: glow-pulse 2.2s ease-in-out infinite;
+}
+
+.spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+.petal {
+  animation: petal-fall var(--duration) linear var(--delay) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
   .animate-float-down,
   .water-flow,
-  .seal-breathe {
+  .seal-breathe,
+  .gold-shimmer,
+  .sway,
+  .flame,
+  .flame-glow,
+  .spin-slow {
     animation: none;
+  }
+  .petal {
+    display: none;
   }
 }
 

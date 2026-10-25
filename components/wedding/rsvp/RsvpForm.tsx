@@ -70,7 +70,7 @@ export function RsvpForm() {
         className="mx-auto max-w-sm text-center"
         role="status"
       >
-        <Heart className="mx-auto h-5 w-5 text-sage" />
+        <Heart className="mx-auto h-5 w-5 text-marigold" />
         <p className="font-script mt-3 text-[2.6rem] leading-tight text-ink">
           {attending ? "See you there!" : "You'll be missed"}
         </p>
@@ -85,7 +85,7 @@ export function RsvpForm() {
             Please note: online RSVP collection isn&rsquo;t connected yet, so this response has not
             been saved.{" "}
             {email ? (
-              <a className="text-olive underline underline-offset-4" href={mailtoFor(status.values, email)}>
+              <a className="text-plum underline underline-offset-4" href={mailtoFor(status.values, email)}>
                 Send it to us by email
               </a>
             ) : (
@@ -146,10 +146,10 @@ export function RsvpForm() {
           ).map(([value, label]) => (
             <label
               key={value}
-              className={`flex min-h-12 cursor-pointer items-center justify-center rounded-lg border px-2 text-center text-[1.02rem] leading-tight transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-olive/40 ${
+              className={`flex min-h-12 cursor-pointer items-center justify-center rounded-lg border px-2 text-center text-[1.02rem] leading-tight transition has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-plum/40 ${
                 values.attendance === value
-                  ? "border-olive bg-olive text-paper"
-                  : "border-line bg-paper/70 text-ink hover:border-sage"
+                  ? "border-plum bg-plum text-paper"
+                  : "border-line bg-paper/70 text-ink hover:border-marigold"
               }`}
             >
               <input
