@@ -1,10 +1,10 @@
 "use client";
 
 import { MotionConfig } from "framer-motion";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { wedding } from "@/lib/wedding-config";
-import { InvitationEnvelope, type EnvelopeState } from "./envelope/InvitationEnvelope";
 import { InvitationHero } from "./hero/InvitationHero";
+import { StageOpening, type OpeningState } from "./stage/StageOpening";
 import { SoundToggle } from "./ui/SoundToggle";
 
 type WeddingExperienceProps = {
@@ -14,10 +14,12 @@ type WeddingExperienceProps = {
 
 /**
  * Owns the opening state machine: closed → opening → revealed.
- * The page stays locked under the envelope until the sequence finishes.
+ * The page stays locked under the curtained stage until the sequence finishes;
+ * the hero starts its entrance as soon as the curtains begin to part.
  */
 export function WeddingExperience({ children }: WeddingExperienceProps) {
-  const [state, setState] = useState<EnvelopeState>("closed");
+  const [state, setState] = useState<OpeningState>("closed");
+  const [heroActive, setHeroActive] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const music = wedding.music.src;
 
@@ -36,14 +38,16 @@ export function WeddingExperience({ children }: WeddingExperienceProps) {
 
   const open = () => {
     setState("opening");
-    // The seal tap is a user gesture, so starting music here is permitted.
+    // Pulling the rope is a user gesture, so starting music here is permitted.
     audioRef.current?.play().catch(() => undefined);
   };
+  const reveal = useCallback(() => setHeroActive(true), []);
+  const finish = useCallback(() => setState("revealed"), []);
 
   return (
     <MotionConfig reducedMotion="user">
       {state !== "revealed" && (
-        <InvitationEnvelope state={state} onOpen={open} onOpened={() => setState("revealed")} />
+        <StageOpening onOpen={open} onReveal={reveal} onFinished={finish} />
       )}
       {music && <SoundToggle src={music} title={wedding.music.title} audioRef={audioRef} />}
 
@@ -52,7 +56,7 @@ export function WeddingExperience({ children }: WeddingExperienceProps) {
         aria-hidden={state === "closed" ? true : undefined}
         inert={state === "closed" ? true : undefined}
       >
-        <InvitationHero active={state !== "closed"} />
+        <InvitationHero active={heroActive} />
         {children}
       </main>
     </MotionConfig>
