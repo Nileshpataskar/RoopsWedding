@@ -119,7 +119,7 @@ function hop(q: number) {
 }
 
 /** Gait strength through a travelling window: eases in and out at the ends. */
-const gaitIn = (p: number) => (p <= 0 || p >= 1 ? 0 : Math.min(1, p / 0.1, (1 - p) / 0.15));
+const gaitIn = (p: number) => (p <= 0 || p >= 1 ? 0 : Math.min(1, p / 0.05, (1 - p) / 0.15));
 
 // One leg's length in model units (hip pivot to sole) and the skipping stride.
 const LEG = 0.64;
@@ -158,11 +158,13 @@ export function characterFrame(clock: StageClock, side: Side, layout: StageLayou
   let lean = 0;
 
   // skip in from the wings, and later into the middle to meet
+  // they come on at full pace (no empty stage) and slow down as they arrive
   const walk = progress(t, ENTRANCE.walk);
+  const walked = 1 - (1 - walk) ** 2;
   const meet = progress(opened, OPENING.meet);
-  const x = side * lerp(lerp(layout.startX, layout.homeX, easeInOut(walk)), layout.meetX, easeInOut(meet));
+  const x = side * lerp(lerp(layout.startX, layout.homeX, walked), layout.meetX, easeInOut(meet));
   const travelled =
-    Math.abs(layout.startX - layout.homeX) * easeInOut(walk) + Math.abs(layout.homeX - layout.meetX) * easeInOut(meet);
+    Math.abs(layout.startX - layout.homeX) * walked + Math.abs(layout.homeX - layout.meetX) * easeInOut(meet);
 
   // a bouncy, waddling skip: legs step with distance covered, arms flap out
   const step = 2 * LEG * Math.sin(STRIDE_SWING) * scale;

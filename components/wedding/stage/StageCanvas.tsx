@@ -21,6 +21,13 @@ import {
 } from "./stageTextures";
 import { ENTRANCE, progress, type StageClock } from "./timeline";
 
+// @react-three/fiber 9 still creates a THREE.Clock internally, which three r183+
+// flags as deprecated on every mount. Drop just that notice; pass everything else on.
+THREE.setConsoleFunction((type: "log" | "warn" | "error", message: string, ...params: unknown[]) => {
+  if (message.startsWith("THREE.Clock: This module has been deprecated")) return;
+  console[type](message, ...params);
+});
+
 export type CastStatus = "loading" | "ready" | "failed";
 
 export type StageCanvasProps = {
