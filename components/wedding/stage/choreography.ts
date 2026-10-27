@@ -120,8 +120,8 @@ function hop(q: number) {
 /** Gait strength through a travelling window: eases in and out at the ends. */
 const gaitIn = (p: number) => (p <= 0 || p >= 1 ? 0 : Math.min(1, p / 0.1, (1 - p) / 0.15));
 
-// One stubby leg's length in model units (hip pivot to sole) and the skipping stride.
-const LEG = 0.5;
+// One leg's length in model units (hip pivot to sole) and the skipping stride.
+const LEG = 0.64;
 const STRIDE_SWING = 0.5;
 
 export type CharacterFrame = {

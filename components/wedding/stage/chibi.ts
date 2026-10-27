@@ -15,8 +15,8 @@ export const CHIBI_RIG: RigProfile = {
   shoulder: 0.19,
   elbow: 0.34,
   hand: 0.5,
-  hipY: -0.5,
-  hipZ: 0.1,
+  hipY: -0.36,
+  hipZ: 0.095,
   neckY: 0.1,
 };
 
@@ -141,34 +141,35 @@ export function buildChibi(role: Role, rig: RigProfile = CHIBI_RIG): Chibi {
     skirt = new THREE.Group();
     skirt.position.set(0, -0.26, 0);
     body.add(skirt);
-    const lehenga: [number, number][] = [[0.15, 0], [0.19, -0.1], [0.27, -0.3], [0.37, -0.52], [0.43, -0.66]];
+    // ankle-length, so her little feet and payals peek out
+    const lehenga: [number, number][] = [[0.15, 0], [0.19, -0.1], [0.27, -0.28], [0.35, -0.44], [0.39, -0.52]];
     mesh(lathe(lehenga, 40), toon(PALETTE.bride.lehenga, { side: THREE.DoubleSide }), skirt);
-    for (const [y, tube] of [[-0.64, 0.028], [-0.5, 0.014], [-0.02, 0.022]] as const) {
+    for (const [y, tube] of [[-0.505, 0.026], [-0.4, 0.013], [-0.02, 0.022]] as const) {
       const ring = mesh(new THREE.TorusGeometry(radiusAt(lehenga, y) + 0.004, tube, 8, 48), gold, skirt, [0, y, 0]);
       ring.rotation.x = Math.PI / 2;
     }
     // little gold butis scattered over the skirt
     for (let i = 0; i < 18; i++) {
       const a = (i / 18) * Math.PI * 2;
-      const y = i % 2 ? -0.4 : -0.27;
+      const y = i % 2 ? -0.31 : -0.2;
       const r = radiusAt(lehenga, y) + 0.004;
       mesh(ball(0.016, 8, 6), gold, skirt, [Math.cos(a) * r, y, Math.sin(a) * r]);
     }
     // dupatta draped down the back
     const drape = mesh(
-      new THREE.CylinderGeometry(0.22, 0.36, 0.72, 20, 1, true, Math.PI * 1.12, Math.PI * 0.76).translate(0, -0.36, 0),
+      new THREE.CylinderGeometry(0.22, 0.34, 0.6, 20, 1, true, Math.PI * 1.12, Math.PI * 0.76).translate(0, -0.3, 0),
       toon(PALETTE.bride.dupatta, { side: THREE.DoubleSide, transparent: true, opacity: 0.88 }),
       body,
       [-0.03, 0.06, 0],
     );
     drape.name = "drape";
   } else {
-    // knee-length sherwani with a gold placket, buttons and a plum sash
-    const coat: [number, number][] = [[0.001, -0.7], [0.25, -0.7], [0.235, -0.5], [0.2, -0.3], [0.19, -0.1], [0.2, 0.0], [0.15, 0.08], [0.001, 0.1]];
+    // thigh-length sherwani with a gold placket, buttons and a plum sash
+    const coat: [number, number][] = [[0.001, -0.56], [0.245, -0.56], [0.225, -0.42], [0.2, -0.3], [0.19, -0.1], [0.2, 0.0], [0.15, 0.08], [0.001, 0.1]];
     mesh(lathe(coat), toon(PALETTE.groom.coat), body);
-    const hem = mesh(new THREE.TorusGeometry(0.25, 0.02, 8, 40), gold, body, [0, -0.69, 0]);
+    const hem = mesh(new THREE.TorusGeometry(0.245, 0.02, 8, 40), gold, body, [0, -0.55, 0]);
     hem.rotation.x = Math.PI / 2;
-    for (let y = -0.62; y < 0.02; y += 0.012) {
+    for (let y = -0.54; y < 0.02; y += 0.012) {
       const r = radiusAt(coat, y);
       mesh(new THREE.BoxGeometry(0.01, 0.0125, 0.045), toon(PALETTE.groom.trim), body, [r, y, 0]);
     }
@@ -197,15 +198,30 @@ export function buildChibi(role: Role, rig: RigProfile = CHIBI_RIG): Chibi {
     const hip = new THREE.Group();
     hip.position.set(0, rig.hipY, side * rig.hipZ);
     body.add(hip);
-    const length = -1 - rig.hipY + 0.06;
-    mesh(new THREE.CylinderGeometry(0.06, 0.068, length, 12).translate(0, -length / 2, 0), isBride ? skin : toon(PALETTE.groom.trousers), hip);
-    const shoe = mesh(ball(0.07, 14, 10), toon((isBride ? PALETTE.bride.shoe : PALETTE.groom.shoe)), hip, [0.035, -length - 0.005, 0], [1.45, 0.7, 1]);
+    // hip pivot down to the ankle; the shoe takes it to the floor
+    const length = rig.hipY + 1 - 0.06;
+    const leg = isBride ? skin : toon(PALETTE.groom.trousers);
+    mesh(new THREE.CylinderGeometry(0.058, 0.072, length, 14).translate(0, -length / 2, 0), leg, hip);
+    mesh(ball(0.062, 12, 10), leg, hip, [0, -length, 0]);
+    if (isBride) {
+      // a jingly payal of gold beads round each ankle
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI * 2;
+        mesh(ball(0.014, 6, 5), gold, hip, [Math.cos(a) * 0.064, -length + 0.045, Math.sin(a) * 0.064]);
+      }
+    } else {
+      // churidar gathers above the ankle
+      for (const y of [0.05, 0.085, 0.12]) {
+        const gather = mesh(new THREE.TorusGeometry(0.064, 0.009, 6, 16), leg, hip, [0, -length + y, 0]);
+        gather.rotation.x = Math.PI / 2;
+      }
+    }
+    mesh(ball(0.075, 16, 12), toon(isBride ? PALETTE.bride.shoe : PALETTE.groom.shoe), hip, [0.04, -length - 0.012, 0], [1.5, 0.66, 1]);
     if (!isBride) {
       // mojari toe curling up
-      const toe = mesh(new THREE.ConeGeometry(0.022, 0.07, 8), gold, hip, [0.13, -length + 0.02, 0]);
+      const toe = mesh(new THREE.ConeGeometry(0.022, 0.07, 8), gold, hip, [0.14, -length + 0.005, 0]);
       toe.rotation.z = -0.9;
     }
-    shoe.renderOrder = 0;
     return hip;
   });
 
