@@ -207,14 +207,15 @@ export function StageOpening({ onOpen, onReveal, onFinished }: StageOpeningProps
         onPointerUp={(event) => endDrag(event, false)}
         onPointerCancel={(event) => endDrag(event, true)}
       >
+        {/* a dark stage while WebGL warms up, so the 3D curtains simply fade in */}
         <motion.div
-          className="absolute inset-0"
+          className="absolute inset-0 bg-[#2a0f30]"
           initial={false}
-          animate={{ opacity: gl !== "ready" || mode === "simple" ? 1 : 0 }}
+          animate={{ opacity: gl !== "ready" && mode !== "simple" ? 1 : 0 }}
           transition={{ duration: 0.4 }}
-        >
-          <CurtainFallback open={opened?.mode === "simple"} />
-        </motion.div>
+        />
+        {/* the drawn curtains only when there is no 3D stage */}
+        {mode === "simple" && <CurtainFallback open={opened?.mode === "simple"} />}
 
         {!reduce && gl !== "failed" && mode !== "simple" && (
           <GlBoundary onError={handleGlError}>

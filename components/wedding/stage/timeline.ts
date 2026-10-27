@@ -7,18 +7,18 @@
 export const ENTRANCE = {
   /** Stage lights warm up. */
   lightsUp: [0, 1.4],
-  /** Bride and groom skip in from the wings. */
-  walk: [0.5, 3.3],
+  /** Bride and groom skip in from the wings, straight away. */
+  walk: [0, 2.6],
   /** They turn to face the guests (the bride with a twirl). */
-  turn: [3.0, 3.9],
+  turn: [2.3, 3.2],
   /** A happy little hop on arrival. */
-  hop: [3.9, 4.4],
+  hop: [3.2, 3.7],
   /** They glance at each other, blushing: she is shy, he scratches his head. */
-  glance: [4.4, 5.7],
+  glance: [3.7, 5.0],
   /** The pull ropes drop down from the pelmet. */
-  ropes: [5.2, 5.8],
+  ropes: [4.5, 5.1],
   /** Each reaches up and takes hold of their rope. */
-  reach: [5.7, 6.4],
+  reach: [5.0, 5.7],
 } as const;
 
 /** When the guest is invited to pull the rope. */

@@ -48,7 +48,8 @@ export function computeLayout(width: number, height: number): StageLayout {
     charHeight,
     charZ,
     homeX: Math.min(visible - reach - 0.34, width * 0.3),
-    startX: visible + charHeight * 0.4,
+    // just out of sight, so they pop in as soon as they start walking
+    startX: visible + charHeight * 0.24,
     meetX: 0.6 * (charHeight / 2),
   };
 }
